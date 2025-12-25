@@ -3,9 +3,23 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
-// Actually, better to use window.location to support mobile IP
-const SOCKET_URL = window.location.hostname === "localhost" ? "http://localhost:5001" : `http://${window.location.hostname}:5001`;
+// Socket URL configuration for production and development
+const getSocketUrl = () => {
+    // Use environment variable if provided (for production)
+    if (import.meta.env.VITE_SOCKET_URL) {
+        return import.meta.env.VITE_SOCKET_URL;
+    }
+    // Development: connect to backend on same host but port 5001
+    if (import.meta.env.DEV) {
+        return window.location.hostname === "localhost"
+            ? "http://localhost:5001"
+            : `http://${window.location.hostname}:5001`;
+    }
+    // Production fallback: same origin (if backend serves frontend)
+    return "";
+};
+
+const SOCKET_URL = getSocketUrl();
 
 export const useAuthStore = create((set, get) => ({
     authUser: null,

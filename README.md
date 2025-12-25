@@ -1,16 +1,127 @@
-# React + Vite
+# Chatter Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A WhatsApp-like real-time chat application built with React, featuring voice and video calls.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 💬 Real-time messaging
+- 📞 Voice calls with WebRTC
+- 📹 Video calls with WebRTC
+- 🔔 Call ringtones
+- 📊 Unread message counts
+- 💌 Last message preview
+- 🟢 Online status indicators
+- 🎨 Beautiful dark theme UI
+- 📱 Mobile responsive
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework:** React 19
+- **State Management:** Zustand
+- **Styling:** Tailwind CSS + DaisyUI
+- **Real-time:** Socket.io-client
+- **WebRTC:** simple-peer
+- **Build Tool:** Vite
+- **Routing:** React Router
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository
+```bash
+git clone https://github.com/somanisuryateja/chatter-surya.git
+cd chatter-surya
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Create `.env` file for production (optional for development)
+```bash
+cp .env.example .env
+```
+
+4. Configure environment variables:
+```env
+VITE_API_URL=https://your-backend-domain.com
+VITE_SOCKET_URL=https://your-backend-domain.com
+```
+
+5. Run the development server
+```bash
+npm run dev
+```
+
+6. Build for production
+```bash
+npm run build
+```
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_API_URL` | Backend API URL | For production |
+| `VITE_SOCKET_URL` | Socket.io server URL | For production |
+
+**Note:** In development, the app uses Vite proxy to connect to `localhost:5001`.
+
+## Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── ChatContainer.jsx
+│   ├── ChatHeader.jsx
+│   ├── MessageInput.jsx
+│   ├── Sidebar.jsx
+│   ├── IncomingCallModal.jsx
+│   ├── ActiveCallInterface.jsx
+│   └── ...
+├── pages/              # Page components
+├── store/              # Zustand stores
+│   ├── useAuthStore.js
+│   ├── useChatStore.js
+│   └── useCallStore.js
+├── lib/                # Utilities
+│   ├── axios.js
+│   └── utils.js
+└── App.jsx
+```
+
+## Deployment
+
+### Vercel (Recommended)
+1. Push code to GitHub
+2. Import project in Vercel
+3. Configure environment variables:
+   - `VITE_API_URL` = your backend URL
+   - `VITE_SOCKET_URL` = your backend URL
+4. Deploy
+
+### Netlify
+1. Push code to GitHub
+2. Create new site in Netlify
+3. Build command: `npm run build`
+4. Publish directory: `dist`
+5. Add environment variables
+
+### Manual Deployment
+```bash
+npm run build
+# Upload contents of `dist` folder to your hosting
+```
+
+## Backend
+
+This frontend requires the Chatter Backend to function.
+Get it here: https://github.com/somanisuryateja/chattter-backend
+
+## Screenshots
+
+Coming soon...
+
+## License
+
+MIT
